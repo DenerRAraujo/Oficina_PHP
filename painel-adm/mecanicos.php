@@ -154,7 +154,8 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                 <div class="modal-footer">
 
                 <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?php echo @$cpf2 ?>" type="hidden" name="cpfAntigo" id="cpfAntigo">
+                <input value="<?php echo @$email2 ?>" type="hidden" name="emailAntigo" id="emailAntigo">
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
@@ -269,43 +270,28 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
     });
 </script>
 
-
-
-
-
 <!--AJAX PARA EXCLUSÃO DOS DADOS -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        var pag = "<?=$pag?>";
-        $('#btn-deletar').click(function (event) {
-            event.preventDefault();
-
-            $.ajax({
-                url: pag + "/excluir.php",
-                method: "post",
-                data: $('form').serialize(),
-                dataType: "text",
-                success: function (mensagem) {
-
-                    if (mensagem.trim() === 'Excluído com Sucesso!!') {
-
-
-                        $('#btn-cancelar-excluir').click();
-                        window.location = "index.php?pag=" + pag;
-                    }
-
-                    $('#mensagem_excluir').text(mensagem)
-
-
-
-                },
-
-            })
-        })
-    })
+	$(document).ready(function () {
+		var pag = "<?=$pag?>";
+		$('#btn-deletar').click(function (event) {
+			event.preventDefault();
+			$.ajax({
+				url: pag + "/excluir.php",
+				method: "post",
+				data: $('form').serialize(),
+				dataType: "text",
+				success: function (mensagem) {
+					if (mensagem.trim() === 'Excluído com Sucesso!') {
+						$('#btn-cancelar-excluir').click();
+						window.location = "index.php?pag=" + pag;
+					}
+					$('#mensagem_excluir').text(mensagem)
+				},
+			})
+		})
+	})
 </script>
-
-
 
 <!--SCRIPT PARA CARREGAR IMAGEM -->
 <script type="text/javascript">
