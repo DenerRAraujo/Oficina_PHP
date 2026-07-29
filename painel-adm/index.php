@@ -1,6 +1,11 @@
 <?php
+@session_start();
 
-    //variaveis para o menu
+if(@$_SESSION['nivelUsuario'] == null || @$_SESSION['nivelUsuario'] != 'Administrador'){
+        echo "<script language='javascript'>
+        window.location='../index.php' </script>";
+}
+//variaveis para o menu
     $pag = @$_GET["pag"];
     $menu1 = "mecanicos";
     $menu2 = "recepcionistas";
@@ -162,7 +167,7 @@
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nome do usuario</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nomeUsuario']; ?></span>
                                     <img class="img-profile rounded-circle" src="../img/sem-foto.jpg">
 
                                 </a>
@@ -243,7 +248,7 @@
 
         <!--  Modal Perfil-->
         <div class="modal fade" id="ModalPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
@@ -256,9 +261,6 @@
 
                     <form id="form-perfil" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
-
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label >Nome</label>
                                         <input value="<?php echo $nome ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
@@ -278,39 +280,23 @@
                                         <label >Senha</label>
                                         <input value="" type="password" class="form-control" id="text" name="senha" placeholder="Senha">
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="col-md-12 form-group">
-                                        <label>Foto</label>
-                                        <input value="<?php echo $img ?>" type="file" class="form-control-file" id="imagem" name="imagem" onchange="carregarImg();">
 
-                                    </div>
-                                    <div class="col-md-12 mb-2">
-                                        <img src="../img/profiles/<?php echo $img ?>" alt="Carregue sua Imagem" id="target" width="100%">
+                                    <div class="modal-footer">
+                                        <input value="<?php echo $idUsuario ?>" type="hidden" name="txtid" id="txtid">
+                                        <input value="<?php echo $cpf ?>" type="hidden" name="antigo" id="antigo">
+
+                                        <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>
                                     </div>
                                 </div>
-                            </div>
-
-
-
-                            <small>
-                                <div id="mensagem" class="mr-4">
-
-                                </div>
-                            </small>
-
-
 
                         </div>
-                        <div class="modal-footer">
 
 
 
-                            <input value="<?php echo $idUsuario ?>" type="hidden" name="txtid" id="txtid">
-                            <input value="<?php echo $cpf ?>" type="hidden" name="antigo" id="antigo">
 
-                            <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>
+
+
                         </div>
                     </form>
 

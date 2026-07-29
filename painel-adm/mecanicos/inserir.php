@@ -42,11 +42,11 @@ if($cpfAntigo != $cpf){
 
 if($emailAntigo != $email){
     $listaMecanicos = $pdo->query("SELECT * FROM mecanicos where email = '$email'");
-    $registroMecanicos = $listaMecanicos->fetchAll(PDO::FETCH_ASSOC);
+    $registroMecanico = $listaMecanicos->fetchAll(PDO::FETCH_ASSOC);
 
-    $total_registros = @count($registroMecanicos);
+    $totalRegistros = @count($registroMecanico);
 
-    if($total_registros>0){
+    if($totalRegistros>0){
         echo 'Já existe um cadastro para esse Email.';
         exit();
     }

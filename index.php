@@ -1,48 +1,56 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<?php
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- Include the above in your HEAD tag -->
+// CRIA AUTOMATICAMENTE O USUARIO ADMIN
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<div class="main">
+require_once("conexao.php");
+$listaUsuarios = $pdo->query("SELECT * FROM usuarios where nivel = 'Administrador'");
+$registroUsuarios = $listaUsuarios->fetchAll(PDO::FETCH_ASSOC);
 
+$totalRegistros = @count($registroUsuarios);
 
+if($totalRegistros==0){
+    $listaUsuarios = $pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', email = '$emailAdm',  senha = 'admin', nivel = 'Administrador'");
+
+ }
+
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="img/logo-favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/logo-favicon.ico" type="image/x-icon">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>Oficina Araújo</title>
+<title>Oficina Araújo</title>
 
-    <style>
-        @charset "utf-8";
+<style>
+@charset "utf-8";
 
-
-@import url//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
-
-
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 
 div.main{
     background: #0264d6; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  #0264d6 1%,#1c2b5a 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-height:calc(100vh);
-width:100%;
+    background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #0264d6 1%,#1c2b5a 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    height:calc(100vh);
+    width:100%;
 }
 
 [class*="fontawesome-"]:before {
@@ -63,32 +71,31 @@ width:100%;
 }
 
 body {
-
     color: #606468;
-  font: 87.5%/1.5em 'Open Sans', sans-serif;
-  margin: 0;
+    font: 87.5%/1.5em 'Open Sans', sans-serif;
+    margin: 0;
 }
 
 a {
-	color: #eee;
-	text-decoration: none;
+    color: #eee;
+    text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 input {
-	border: none;
-	font-family: 'Open Sans', Arial, sans-serif;
-	font-size: 14px;
-	line-height: 1.5em;
-	padding: 0;
-	-webkit-appearance: none;
+    border: none;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5em;
+    padding: 0;
+    -webkit-appearance: none;
 }
 
 p {
-	line-height: 1.5em;
+    line-height: 1.5em;
 }
 
 .clearfix {
@@ -115,53 +122,54 @@ p {
 
 /* ---------- LOGIN ---------- */
 
+/* Aumentado de 250px para 350px */
 #login form{
-	width: 250px;
+    width: 350px;
 }
 #login, .logo{
     display:inline-block;
     width:40%;
 }
 #login{
-border-right:1px solid #fff;
-  padding: 0px 22px;
-  width: 59%;
+    border-right:1px solid #fff;
+    padding: 0px 22px;
+    width: 59%;
 }
 .logo{
-color:#fff;
-font-size:50px;
-  line-height: 125px;
+    color:#fff;
+    font-size:50px;
+    line-height: 125px;
 }
 
 #login form span.fa {
-	background-color: #fff;
-	border-radius: 3px 0px 0px 3px;
-	color: #000;
-	display: block;
-	float: left;
-	height: 50px;
+    background-color: #fff;
+    border-radius: 3px 0px 0px 3px;
+    color: #000;
+    display: block;
+    float: left;
+    height: 50px;
     font-size:24px;
-	line-height: 50px;
-	text-align: center;
-	width: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
 }
 
 #login form input {
-	height: 50px;
+    height: 50px;
 }
 fieldset{
     padding:0;
     border:0;
     margin: 0;
-
 }
+
 #login form input[type="text"], input[type="password"] {
-	background-color: #fff;
-	border-radius: 0px 3px 3px 0px;
-	color: #000;
-	margin-bottom: 1em;
-	padding: 0 16px;
-	width: 200px;
+    background-color: #fff;
+    border-radius: 0px 3px 3px 0px;
+    color: #000;
+    margin-bottom: 1em;
+    padding: 0 16px;
+    width: 300px;
 }
 
 #login form input[type="submit"] {
@@ -171,22 +179,21 @@ fieldset{
   background-color: #000000;
   color: #eee;
   font-weight: bold;
-  /* margin-bottom: 2em; */
   text-transform: uppercase;
   padding: 5px 10px;
   height: 30px;
 }
 
 #login form input[type="submit"]:hover {
-	background-color: #0300c4d7;
+    background-color: #0300c4d7;
 }
 
 #login > p {
-	text-align: center;
+    text-align: center;
 }
 
 #login > p span {
-	padding-left: 5px;
+    padding-left: 5px;
 }
 .middle {
   display: flex;
@@ -196,45 +203,43 @@ fieldset{
 .small-text:hover{
     color: yellow;
     text-decoration: none;
-
 }
 </style>
 </head>
-<body>
-    <div class="container">
-<center>
-<div class="middle">
-      <div id="login">
+    <body>
+        <div class="main">
+            <div class="container">
+            <center>
+            <div class="middle">
+                <div id="login">
 
-        <form action="javascript:void(0);" method="get">
+                    <form action="autenticar.php" method="post">
 
-          <fieldset class="clearfix">
+                        <fieldset class="clearfix">
 
-            <p ><span class="fa fa-user"></span><input type="text" name="email Placeholder="Email" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p><span class="fa fa-lock"></span><input type="password" name="senha" Placeholder="Senha" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                            <p><span class="fa fa-user"></span><input type="text" name="email" Placeholder="Email" required></p>
+                            <p><span class="fa fa-lock"></span><input type="password" name="senha" Placeholder="Senha" required></p>
 
-             <div>
-                                <span style="width:48%; text-align:left; font-size: 13px;  display: inline-block;"><a class="small-text" href="#">Esqueceu a senha?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Acessar"></span>
+                            <div>
+                            <span style="width:48%; text-align:left; font-size: 16px; display: inline-block;"><a class="small-text" href="#">Esqueceu a senha?</a></span>
+                            <span style="width:50%; text-align:right; display: inline-block;"><input type="submit" value="Acessar"></span>
                             </div>
 
-          </fieldset>
-<div class="clearfix"></div>
-        </form>
+                        </fieldset>
+                        <div class="clearfix"></div>
+                    </form>
 
-        <div class="clearfix"></div>
+                <div class="clearfix"></div>
 
-      </div> <!-- end login -->
-      <div class="logo">
-        <img class="mt-2" src="img/logo2.png" width="270">
-        <div class="clearfix"></div>
-      </div>
+                </div> <!-- end login -->
+                <div class="logo">
+                    <img class="mt-2" src="img/logo2.png" width="270">
+                    <div class="clearfix"></div>
+                </div>
 
-      </div>
-</center>
-    </div>
-
-</div>
-</body>
+                </div>
+            </center>
+            </div>
+        </div>
+    </body>
 </html>
-

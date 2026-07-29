@@ -1,8 +1,9 @@
 <?php
-$nome_oficina = "Oficina Araújo";
+$nomeOficina = "Oficina Araújo";
 $url = "http://localhost/oficina/";
-$endereco_oficina = "Rua 123";
-$telefone_oficina = "123456";
+$enderecoOficina = "Rua 123";
+$telefoneOficina = "123456";
+$emailAdm = 'ofcaraujoadmin@gmail.com';
 
 //Variveis de Banco de Dados
 $servidor = 'localhost';
